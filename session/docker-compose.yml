@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  # db_postgres:
+  #   networks:
+  #     - sessionsapi
+  #   restart: on-failure
+  #   image: postgres:12.1-alpine
+  #   container_name: "postgres_sessionsapi"
+  #   environment:
+  #     - POSTGRES_USER=docker
+  #     - POSTGRES_PASSWORD:docker
+  #     - POSTGRES_DB=sessionsapi
+  #   volumes:
+  #     - "./src/database/postgres:/var/lib/postgresql/data"
+  #   ports:
+  #     - 5432:5432
+
+  api_node:
+    build: .
+    # networks:
+    #   - app-network
+    # links:
+    #   - db_postgres
+    # depends_on:
+    #   - db_postgres
+    container_name: "node_sessionsapi"
+    volumes:
+      - .:/usr/app
+    ports:
+      - 3332:3332
+    command: "sh /usr/app/start.sh"
+    env_file: .dockerenv
+
+networks:
+  default:
+    external:
+      name: app-network

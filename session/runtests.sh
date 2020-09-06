@@ -1,0 +1,1 @@
+docker exec -i node_carsapi /bin/sh -c "yarn test"
