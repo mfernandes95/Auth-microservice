@@ -31,7 +31,7 @@ services:
       - 3333:3333
     command: "sh /usr/app/start.sh"
     env_file: .dockerenv
-# networks:
-#   default:
-#     external:
-#       name: app-network
+networks:
+  default:
+    external:
+      name: app-network

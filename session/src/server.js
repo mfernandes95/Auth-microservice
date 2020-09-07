@@ -15,7 +15,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc));
  */
 const kafka = new Kafka({
   clientId: "api",
-  brokers: ["localhost:9092"],
+  brokers: ["kafka:29092"],
   logLevel: logLevel.WARN,
   retry: {
     initialRetryTime: 300,

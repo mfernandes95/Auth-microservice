@@ -8,7 +8,7 @@
 import { Kafka } from "kafkajs";
 
 const kafka = new Kafka({
-  brokers: ["localhost:9092"],
+  brokers: ["kafka:29092"],
   clientId: "certificate",
 });
 
