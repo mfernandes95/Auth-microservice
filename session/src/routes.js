@@ -15,8 +15,6 @@ routes.post("/certifications", async (req, res) => {
     grade: 10,
   };
 
-  console.log("HERRRRRRRRR", req.producer);
-
   // Chamar micro serviço
   await req.producer.send({
     topic: "issue-certificate",

@@ -29,6 +29,8 @@ async function run() {
 
       const payload = JSON.parse(message.value);
 
+      console.log("PAYYYYYYYYYY==============", payload);
+
       // setTimeout(() => {
       producer.send({
         topic: "certification-response",
