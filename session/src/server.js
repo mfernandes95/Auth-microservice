@@ -1,4 +1,3 @@
-import express from "express";
 const swaggerJsDoc = require("./swagger.json");
 const swaggerUi = require("swagger-ui-express");
 import { Kafka, logLevel } from "kafkajs";

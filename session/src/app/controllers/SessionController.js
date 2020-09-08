@@ -10,28 +10,6 @@ class SessionController {
 
       // -------------
       console.log("REQQ", req.body);
-      const message = {
-        user: { id: 1, name: "Diego Fernandes" },
-        course: "Kafka com Node.js",
-        grade: 10,
-      };
-
-      // Chamar micro serviço
-      await req.producer.send({
-        topic: "issue-certificate",
-        compression: CompressionTypes.GZIP,
-        messages: [
-          { value: JSON.stringify(message) },
-          {
-            value: JSON.stringify({
-              ...message,
-              user: { ...message.user, name: "Pellizzetti" },
-            }),
-          },
-        ],
-      });
-
-      return res.send({ ok: true });
 
       // const user = await User.findOne({ where: { email } });
 

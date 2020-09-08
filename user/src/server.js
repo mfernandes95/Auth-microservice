@@ -1,11 +1,11 @@
-// const app = require("./app");
-// const swaggerJsDoc = require("./swagger.json");
-// const swaggerUi = require("swagger-ui-express");
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc));
-
-// app.listen(process.env.PORT || 3333);
-
+const swaggerJsDoc = require("./swagger.json");
+const swaggerUi = require("swagger-ui-express");
 import { Kafka } from "kafkajs";
+
+// import routes from "./routes";
+const app = require("./app");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc));
 
 const kafka = new Kafka({
   brokers: ["kafka:29092"],
@@ -41,6 +41,8 @@ async function run() {
       // }, 3000);
     },
   });
+
+  app.listen(process.env.PORT || 3333);
 }
 
 run().catch(console.error);
