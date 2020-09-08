@@ -36,7 +36,7 @@ async function run() {
         topic: "certification-response",
         messages: [
           {
-            value: `Certificado do usuário ${payload.user.name} do curso ${payload.course} gerado!`,
+            value: `Certificado do usuário ${payload.email} do curso ${payload.password} gerado!`,
           },
         ],
       });
