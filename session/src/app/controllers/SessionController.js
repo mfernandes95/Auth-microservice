@@ -20,6 +20,15 @@ class SessionController {
         messages: [{ value: JSON.stringify(data) }],
       });
 
+      // console.log("CONSSSSSS=================", req.consumer);
+      // await req.consumer.run({
+      //   eachMessage: async ({ topic, partition, message }) => {
+      //     console.log("Resposta", String(message.value));
+      //   },
+      // });
+
+      return res.json({ ok: true });
+
       // const user = await User.findOne({ where: { email } });
 
       // if (!user) return res.status(401).json({ message: "User not found" });

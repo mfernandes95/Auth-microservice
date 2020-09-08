@@ -2,6 +2,8 @@ const swaggerJsDoc = require("./swagger.json");
 const swaggerUi = require("swagger-ui-express");
 import { Kafka } from "kafkajs";
 
+const { User } = require("./app/models");
+
 // import routes from "./routes";
 const app = require("./app");
 
@@ -31,16 +33,37 @@ async function run() {
 
       console.log("PAYYYYYYYYYY==============", payload);
 
-      // setTimeout(() => {
-      producer.send({
-        topic: "certification-response",
-        messages: [
-          {
-            value: `Certificado do usuário ${payload.email} do curso ${payload.password} gerado!`,
-          },
-        ],
+      const userExists = await User.findOne({
+        where: { email: payload.email },
       });
-      // }, 3000);
+
+      console.log("USERRRRRR================", userExists);
+
+      if (userExists) {
+        // setTimeout(() => {
+        producer.send({
+          topic: "certification-response",
+          messages: [
+            {
+              value: userExists.dataValues.password_hash,
+            },
+          ],
+        });
+        // }, 3000);
+      }
+
+      if (!userExists) {
+        // setTimeout(() => {
+        producer.send({
+          topic: "certification-response",
+          messages: [
+            {
+              value: `User not found`,
+            },
+          ],
+        });
+        // }, 3000);
+      }
     },
   });
 

@@ -30,6 +30,7 @@ const consumer = kafka.consumer({ groupId: "certificate-group-receiver" });
  */
 app.use((req, res, next) => {
   req.producer = producer;
+  req.consumer = consumer;
 
   return next();
 });
