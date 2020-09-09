@@ -10,4 +10,4 @@ const kafka = new Kafka({
   },
 });
 
-module.exports = kafka;
+export default kafka;
