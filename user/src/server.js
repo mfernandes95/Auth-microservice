@@ -7,12 +7,9 @@ const { User } = require("./app/models");
 // import routes from "./routes";
 const app = require("./app");
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc));
+import kafka from "./kafka";
 
-const kafka = new Kafka({
-  brokers: ["kafka:29092"],
-  clientId: "certificate",
-});
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc));
 
 const topic = "issue-certificate";
 const consumer = kafka.consumer({ groupId: "certificate-group" });

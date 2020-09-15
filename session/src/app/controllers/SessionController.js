@@ -1,5 +1,6 @@
 const { User } = require("../models");
 const { CompressionTypes } = require("kafkajs");
+const bcrypt = require("bcryptjs");
 
 class SessionController {
   async store(req, res) {
@@ -20,14 +21,18 @@ class SessionController {
         messages: [{ value: JSON.stringify(data) }],
       });
 
-      // console.log("CONSSSSSS=================", req.consumer);
-      // await req.consumer.run({
-      //   eachMessage: async ({ topic, partition, message }) => {
-      //     console.log("Resposta", String(message.value));
-      //   },
-      // });
+      await req.consumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+          const compare = await bcrypt.compare(password, String(message.value));
 
-      return res.json({ ok: true });
+          console.log("Resposta", String(message.value), compare);
+
+          if (!compare)
+            return res.status(401).json({ message: "Incorrect credentials" });
+
+          return res.json({ token: String(message.value) });
+        },
+      });
 
       // const user = await User.findOne({ where: { email } });
 
